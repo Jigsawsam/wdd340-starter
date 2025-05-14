@@ -4,3 +4,267 @@
 *:after {
   box-sizing: border-box;
 }
+
+body {
+  font-family: sans-serif;
+}
+
+#wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+header span {
+  font-size: 1.5rem;
+}
+
+#top-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  margin-bottom: 20px;
+}
+
+.siteName a {
+  color: black;
+  text-decoration: none;
+  font-size: larger;
+}
+
+#tools a {
+  color: black;
+  text-decoration: none;
+  font-size: small;
+}
+
+nav {
+  background-color: rgb(36, 35, 50);
+  padding: 15px 0px;
+  margin-bottom: 20px;
+  color: white;
+}
+
+nav ul {
+  display: flex;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  max-width: 1200px;
+  width: 100%;
+  justify-content: space-around;
+}
+
+nav ul li {
+  margin-right: 10px;
+  margin-left: 15px;
+  font-size: small;
+}
+
+h1 {
+  color: rgb(0, 0, 0);
+  font-size: medium;
+  margin-bottom: 20px
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  margin-bottom: 20px
+}
+
+.image-container picture img {
+  width: 110%;
+  height: auto;
+  display: block;
+}
+
+.image-overlay {
+  position: absolute;
+  bottom: 20px;
+  left: 10px;
+  background-color: rgba(255, 255, 255, 0.8);
+  /* semi-transparent gray */
+  color: rgb(79, 173, 207);
+}
+
+.image-overlay ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: small;
+}
+
+.image-overlay ul li {
+  padding: 1px;
+}
+
+.overlay-title {
+  margin: 0;
+  font-size: medium;
+}
+
+.overlay-button {
+  padding: 7px;
+  font-size: small;
+  background-color: rgb(79, 173, 207);
+  border: none;
+  box-shadow: .5px .5px 1px;
+  border-radius: 2px;
+}
+
+.reviews {
+  list-style-position: inside;
+  margin: 0;
+  padding: 0px;
+}
+
+.reviews li {
+  padding: 5px;
+  font-size: small;
+}
+
+.reviews+h1 {
+  margin-top: 20px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  padding: 10px;
+}
+
+.grid-item {
+  text-align: center;
+}
+
+.image-box {
+  border: 1px solid #000000;
+  background-color: rgb(79, 173, 207);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  height: 90px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-box img {
+  width: 60px;
+  height: auto;
+  padding-top: 9%;
+}
+
+.grid-item h3 {
+  margin-top: 5px;
+  font-size: 1rem;
+  color: #333;
+}
+
+@media only screen and (min-width: 35rem) {
+  body {
+    background-image: url('../images/site/small_check.jpg');
+  }
+
+  h1 {
+    color: rgb(0, 0, 0);
+    font-size: xx-large;
+  }
+
+  header span {
+    font-size: 2rem;
+  }
+
+  #tools a {
+    font-size: medium;
+  }
+
+  nav {
+    padding: 10px 0px;
+  }
+
+  nav ul li {
+    font-size: medium;
+  }
+
+  .image-overlay {
+    bottom: 50px;
+    left: 150px;
+  }
+
+  .image-overlay ul {
+    font-size: x-large;
+  }
+
+  .image-overlay ul li {
+    padding: 2px;
+  }
+
+  .overlay-title {
+    font-size: x-large;
+  }
+
+  .overlay-button {
+    padding: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: large;
+    margin-top: 20px;
+  }
+
+  .content-layout {
+    display: flex;
+  }
+
+  .upgrades-section {
+    flex: 2;
+    flex: 0 0 auto;
+  }
+  
+  .reviews-section {
+    flex: 1;
+    padding-top: 22px;
+    margin-left: 20px;
+    text-align: left;
+  }
+  
+  .reviews li {
+    padding: 10px;
+    font-size: large;
+    
+  }
+  
+  .reviews-section h1 {
+    margin-top: 0;
+  }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  
+  .image-box {
+    height: 100px;
+    width: 200px;
+  }
+  
+  .image-box img {
+    width: 60px;
+    height: auto;
+    padding-top: 0%;
+  }
+ 
+  #wrapper {
+    max-width: 1000px;
+    margin: 20px auto; 
+    padding: 20px;
+    background-color: white;
+    border: 5px solid  rgb(79, 173, 207);
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 10px;
+  }
+}
