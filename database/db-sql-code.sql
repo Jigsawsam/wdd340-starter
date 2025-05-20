@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS public.inventory
 	inv_make character varying NOT NULL, 
 	inv_model character varying NOT NULL, 
 	inv_year character (4) NOT NULL, 
-	in_description text NOT NULL, 
+	inv_description text NOT NULL, 
 	inv_image character varying NOT NULL, 
 	inv_thumbnail character varying NOT NULL, 
 	inv_price numeric(9, 0) NOT NULL, 
@@ -61,7 +61,7 @@ INSERT INTO public.inventory (
     inv_make,
     inv_model,
     inv_year,
-    in_description,
+    inv_description,
     inv_image,
     inv_thumbnail,
     inv_price,
@@ -238,7 +238,7 @@ VALUES   (
   );
 
 UPDATE inventory
-SET in_description = REPLACE(in_description, 'small interiors', 'a huge interior')
+SET inv_description = REPLACE(inv_description, 'small interiors', 'a huge interior')
 WHERE inv_id = 10;
 
 SELECT i.inv_make, i.inv_model, c.classification_name
