@@ -60,6 +60,11 @@ nav ul li {
   font-size: small;
 }
 
+nav li a {
+  text-decoration: none; 
+  color: white;
+}
+
 h1 {
   color: rgb(0, 0, 0);
   font-size: medium;
@@ -87,7 +92,6 @@ h1 {
   bottom: 20px;
   left: 10px;
   background-color: rgba(255, 255, 255, 0.8);
-  /* semi-transparent gray */
   color: rgb(79, 173, 207);
 }
 
@@ -164,6 +168,39 @@ h1 {
   color: #333;
 }
 
+
+
+.vehicle-detail {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.vehicle-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.vehicle-info {
+  flex: 1 1 300px;
+  max-width: 600px;
+}
+
+.vehicle-info h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.vehicle-info p {
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+}
+
+/*---------------------------------------------
+Larger view
+---------------------------------------------*/
 @media only screen and (min-width: 35rem) {
   body {
     background-image: url('../images/site/small_check.jpg');
