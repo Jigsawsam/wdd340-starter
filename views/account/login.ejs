@@ -1,0 +1,18 @@
+<main>
+  <h1><%= title %></h1>
+
+  <%- messages() %>
+
+
+
+  <form id="loginForm" action="/account/login" method="POST" class="login-form">
+    <label for="email">Email:</label>
+    <input type="email" name="account_email" id="email" required value="<%= locals.account_email %>">
+
+    <label for="password">Password:</label>
+    <input type="password" name="account_password" id="password" required>
+
+    <button type="submit">Login</button>
+    <p class="signup-link">Don't have an account? <a href="/account/register">Sign-up</a></p>
+  </form>
+</main>
