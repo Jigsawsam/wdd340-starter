@@ -132,6 +132,52 @@ validate.checkInventoryData = async (req, res, next) => {
       })
     }
     next()
+}
+
+/* ******************************
+ * Check inventory data and redirect errors to edit view
+ * ***************************** */
+validate.checkUpdateData = async (req, res, next) => {
+  const errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    const {
+      classification_id,
+      inv_make,
+      inv_model,
+      inv_year,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_miles,
+      inv_color,
+      inv_id
+    } = req.body
+
+    const nav = await utilities.getNav()
+    const classificationList = await utilities.buildClassificationList(
+      parseInt(classification_id)
+    )
+
+    return res.render("inventory/edit-inventory", {
+      title: `Edit ${inv_make} ${inv_model}`,
+      nav,
+      classificationList,
+      errors,             
+      classification_id,
+      inv_make,
+      inv_model,
+      inv_year,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_miles,
+      inv_color,
+      inv_id
+    })
   }
+  next()
+}
 
 module.exports = validate

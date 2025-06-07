@@ -12,18 +12,24 @@ router.get("/login", utilities.handleErrors(accountController.buildLogin))
 router.get("/register", utilities.handleErrors(accountController.buildRegister))
 // Process the registration data
 router.post(
-    "/register",
-    regValidate.registrationRules(),
-    regValidate.checkRegData,
-    utilities.handleErrors(accountController.registerAccount)
+  "/register",
+  regValidate.registrationRules(),
+  regValidate.checkRegData,
+  utilities.handleErrors(accountController.registerAccount)
 )
 
-// Process the login attempt
+// default route for management accounts view
+router.get("/", 
+utilities.checkLogin, 
+utilities.handleErrors(accountController.buildManagement)
+)
+
+// Process the login request
 router.post(
-    "/login",
-    (req, res) => {
-      res.status(200).send('login process')
-    }
+  "/login",
+  regValidate.loginRules(),
+  regValidate.checkLoginData,
+  utilities.handleErrors(accountController.accountLogin)
 )
   
 
