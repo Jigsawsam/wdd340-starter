@@ -28,8 +28,12 @@ router.get(
 // Route to display the edit inventory item view
 router.get(
     "/edit/:inv_id",
-    utilities.handleErrors(invController.editInventoryView)
-  )
+    utilities.handleErrors(invController.editInventoryView))
+
+// Display the delete confirmation view
+  router.get(
+    "/delete/:inv_id",
+    utilities.handleErrors(invController.buildDeleteInventoryView))
 
 // Process add-classification form
 router.post(
@@ -47,10 +51,16 @@ router.post(
     utilities.handleErrors(invController.addInventory)
 )
 
+// handle update form
 router.post(
     "/update/", 
     invValidate.inventoryRules(), 
     invValidate.checkUpdateData,
     invController.updateInventory)
+
+// handle the delete POST request
+router.post(
+    "/delete/",
+    invController.deleteInventory)
 
 module.exports = router;

@@ -182,7 +182,7 @@ invCont.editInventoryView = async function (req, res, next) {
 invCont.updateInventory = async function (req, res, next) {
   let nav = await utilities.getNav()
   const {
-    
+    inv_id,
     inv_make,
     inv_model,
     inv_description,
@@ -193,11 +193,10 @@ invCont.updateInventory = async function (req, res, next) {
     inv_miles,
     inv_color,
     classification_id,
-    inv_id,
   } = req.body
   
   const updateResult = await invModel.updateInventory(
-   
+    inv_id,
     inv_make,
     inv_model,
     inv_description,
@@ -207,8 +206,7 @@ invCont.updateInventory = async function (req, res, next) {
     inv_year,
     inv_miles,
     inv_color,
-    classification_id,
-    inv_id
+    classification_id
   )
 
   if (updateResult) {
@@ -224,7 +222,7 @@ invCont.updateInventory = async function (req, res, next) {
     nav,
     classificationSelect: classificationSelect,
     errors: null,
-    
+    inv_id,
     inv_make,
     inv_model,
     inv_year,
@@ -234,9 +232,56 @@ invCont.updateInventory = async function (req, res, next) {
     inv_price,
     inv_miles,
     inv_color,
-    classification_id,
-    inv_id
+    classification_id
     })
+  }
+}
+
+/* ***************************
+ *  deliver Delete Confirmation View
+ * ************************** */
+invCont.buildDeleteInventoryView = async function (req, res, next) {
+  const inv_id = parseInt(req.params.inv_id)
+  let nav = await utilities.getNav()
+
+  try {
+    const itemData = await invModel.getInventoryById(inv_id)
+    const name = `${itemData.inv_make} ${itemData.inv_model}`
+
+    res.render("inventory/delete-confirm", {
+      title: "Delete " + name,
+      nav,
+      errors: null,
+      inv_id: itemData.inv_id,
+      inv_make: itemData.inv_make,
+      inv_model: itemData.inv_model,
+      inv_year: itemData.inv_year,
+      inv_price: itemData.inv_price
+    })
+  } catch (error) {
+    next(new Error("Failed to build delete confirmation view"))
+  }
+}
+
+/* ***************************
+ *  Process Inventory Deletion
+ * ************************** */
+invCont.deleteInventory = async function (req, res, next) {
+  const inv_id = parseInt(req.body.inv_id)
+  let nav = await utilities.getNav()
+
+  try {
+    const deleteResult = await invModel.deleteInventoryItem(inv_id)
+
+    if (deleteResult) {
+      req.flash("notice", "The vehicle was successfully deleted.")
+      res.redirect("/inv/")
+    } else {
+      req.flash("notice", "Sorry, the delete failed.")
+      res.redirect(`/inv/delete/${inv_id}`)
+    }
+  } catch (error) {
+    next(new Error("Failed to process inventory deletion"))
   }
 }
 
