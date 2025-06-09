@@ -118,5 +118,58 @@ validate.checkLoginData = async (req, res, next) => {
   }
   next()
 }
-  
+
+/* ******************************
+ * check update account
+ * ***************************** */
+validate.updateRules = () => {
+  return [
+    body("account_firstname").trim().notEmpty().withMessage("Please provide a first name."),
+    body("account_lastname").trim().notEmpty().withMessage("Please provide a last name."),
+    body("account_email")
+      .trim()
+      .isEmail()
+      .withMessage("A valid email is required."),
+  ]
+}
+
+validate.passwordRules = () => {
+  return [
+    body("account_password")
+      .trim()
+      .isStrongPassword({ minLength: 12 })
+      .withMessage("Password must be at least 12 characters and contain a number, special character, uppercase and lowercase letter.")
+  ]
+}
+
+validate.checkUpdateData = async (req, res, next) => {
+  const errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    const account_id = req.body.account_id
+    const accountData = await accountModel.getAccountById(account_id)
+    return res.render("account/update", {
+      title: "Edit Account",
+      nav: await utilities.getNav(),
+      errors,
+      accountData,
+    })
+  }
+  next()
+}
+
+validate.checkPasswordData = async (req, res, next) => {
+  const errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    const account_id = req.body.account_id
+    const accountData = await accountModel.getAccountById(account_id)
+    return res.render("account/update", {
+      title: "Edit Account",
+      nav: await utilities.getNav(),
+      errors,
+      accountData,
+    })
+  }
+  next()
+}
+
 module.exports = validate

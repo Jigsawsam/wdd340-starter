@@ -4,6 +4,7 @@ const router = new express.Router()
 const invController = require("../controllers/invController")
 const invValidate = require("../utilities/inventory-validation")
 const utilities = require("../utilities")
+const inventoryController = require("../controllers/invController")
 
 // Route to build inventory by classification view
 router.get("/type/:classificationId", invController.buildByClassificationId);
@@ -12,7 +13,7 @@ router.get("/type/:classificationId", invController.buildByClassificationId);
 router.get("/detail/:invId", invController.buildByInventoryId);
 
 // Route for inventory management view
-router.get("/", utilities.handleErrors(invController.buildManagementView))
+router.get("/", utilities.authorizeEmployee,  utilities.handleErrors(invController.buildManagementView))
 
 // Route to deliver classification form
 router.get("/add-classification", utilities.handleErrors(invController.buildAddClassification))
@@ -34,6 +35,12 @@ router.get(
   router.get(
     "/delete/:inv_id",
     utilities.handleErrors(invController.buildDeleteInventoryView))
+
+
+// route for authorize login
+router.get("/inv/add", 
+utilities.authorizeEmployee, 
+utilities.handleErrors(inventoryController.buildAddInventoryForm))
 
 // Process add-classification form
 router.post(

@@ -129,4 +129,55 @@ async function buildManagement(req, res) {
   })
 }
 
-module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildManagement }
+/* ****************************************
+ *  Deliver account update view
+ * ************************************ */
+async function buildUpdateView (req, res) {
+  const account_id = parseInt(req.params.account_id)
+  const accountData = await accountModel.getAccountById(account_id)
+  res.render("account/update", {
+    title: "Edit Account",
+    nav: await utilities.getNav(),
+    accountData,
+    errors: null
+  })
+}
+
+async function updateAccount (req, res) {
+  const { account_id, account_firstname, account_lastname, account_email } = req.body
+  const updateResult = await accountModel.updateAccount(account_id, account_firstname, account_lastname, account_email)
+
+  if (updateResult) {
+    req.flash("notice", "Account updated successfully.")
+    const updatedData = await accountModel.getAccountById(account_id)
+    res.render("account/management", {
+      title: "Account Management",
+      nav: await utilities.getNav(),
+      accountData: updatedData
+    })
+  } else {
+    req.flash("notice", "Update failed.")
+    res.redirect(`/account/update/${account_id}`)
+  }
+}
+
+async function updatePassword (req, res) {
+  const { account_id, account_password } = req.body
+  const hashedPassword = await bcrypt.hash(account_password, 10)
+  const updateResult = await accountModel.updatePassword(account_id, hashedPassword)
+
+  if (updateResult) {
+    req.flash("notice", "Password updated successfully.")
+    const updatedData = await accountModel.getAccountById(account_id)
+    res.render("account/management", {
+      title: "Account Management",
+      nav: await utilities.getNav(),
+      accountData: updatedData
+    })
+  } else {
+    req.flash("notice", "Password update failed.")
+    res.redirect(`/account/update/${account_id}`)
+  }
+}
+
+module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildManagement, buildUpdateView, updateAccount, updatePassword }

@@ -143,4 +143,14 @@ Util.checkLogin = (req, res, next) => {
   }
  }
 
+ /* ****************************************
+ *  Authorize login
+ * ************************************ */
+ Util.authorizeEmployee = (req, res, next) => {
+  if (res.locals.loggedin && ["Employee", "Admin"].includes(res.locals.accountData.account_type)) {
+    return next()
+  }
+  req.flash("notice", "You must be an employee or admin to access that page.")
+  return res.redirect("/account/login")
+}
 module.exports = Util
