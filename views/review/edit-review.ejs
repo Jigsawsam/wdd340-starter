@@ -1,0 +1,18 @@
+<section class="register-form">
+<%- messages() %>
+
+<% if (errors && errors.length > 0) { %>
+  <ul class="notice">
+    <% errors.forEach(error => { %>
+      <li><%= error.msg %></li>
+    <% }) %>
+  </ul>
+<% } %>
+
+<h1>Edit Review for <%= vehicle.inv_year %> <%= vehicle.inv_make %> <%= vehicle.inv_model %></h1>
+<form action="/review/update" method="post">
+  <textarea name="review_text" required><%= review.review_text %></textarea>
+  <input type="hidden" name="review_id" value="<%= review.review_id %>">
+  <button type="submit">Update Review</button>
+</form>
+</section>

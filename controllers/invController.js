@@ -1,6 +1,6 @@
 const invModel = require("../models/inventory-model")
 const utilities = require("../utilities/")
-
+const reviewModel = require("../models/reviewModel")
 
 const invCont = {}
 
@@ -26,13 +26,18 @@ invCont.buildByClassificationId = async function (req, res, next) {
 invCont.buildByInventoryId = async function (req, res, next) {
   const invId = req.params.invId;
   const data = await invModel.getInventoryById(invId);
+  const reviews = await reviewModel.getReviewsByInvId(invId)
   const detail = await utilities.buildVehicleDetail(data[0]);
   let nav = await utilities.getNav();
   const vehicleName = `${data[0].inv_year} ${data[0].inv_make} ${data[0].inv_model}`;
   res.render("./inventory/detail", {
     title: vehicleName,
     nav,
-    detail
+    reviews,
+    detail,
+    loggedin: res.locals.loggedin,
+    vehicle: data[0],
+    errors: null,
   });
 }
 
@@ -46,7 +51,7 @@ invCont.buildManagementView = async function (req, res) {
     title: "Inventory Management",
     nav,
     classificationSelect,
-    errors: null,
+    errors: []
   })
 }
 

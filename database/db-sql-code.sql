@@ -47,6 +47,15 @@ CREATE TABLE IF NOT EXISTS public.account
     CONSTRAINT account_pkey PRIMARY KEY (account_id)
 );
 
+-- Create review table --
+CREATE TABLE public.review (
+  review_id SERIAL PRIMARY KEY,
+  review_text TEXT NOT NULL,
+  review_date TIMESTAMPTZ DEFAULT NOW() NOT NULL,
+  inv_id INTEGER NOT NULL REFERENCES inventory(inv_id),
+  account_id INTEGER NOT NULL REFERENCES account(account_id)
+);
+
 -- Data for table 'classification'
 INSERT INTO public.classification (classification_name)
 VALUES ('Custom') ,
@@ -249,3 +258,5 @@ WHERE c.classification_name = 'Sport';
 UPDATE inventory
 SET inv_image = REPLACE(inv_image, '/images/', '/images/vehicles/'),
     inv_thumbnail = REPLACE(inv_thumbnail, '/images/', '/images/vehicles/');
+
+

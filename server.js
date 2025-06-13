@@ -18,7 +18,9 @@ const errorRoute = require("./routes/errorRoute")
 const utilities = require('./utilities')
 const accountRoute = require("./routes/accountRoute")
 const bodyParser = require("body-parser")
+const reviewRoute = require('./routes/reviewRoute')
 const cookieParser = require("cookie-parser")
+
 
 
 
@@ -67,6 +69,8 @@ app.get("/", utilities.handleErrors(baseController.buildHome))
 app.use("/inv", inventoryRoute)
 // Account routes
 app.use("/account", accountRoute)
+// reviews route
+app.use('/review', reviewRoute)
 // Error routes
 app.use("/error", errorRoute)
 

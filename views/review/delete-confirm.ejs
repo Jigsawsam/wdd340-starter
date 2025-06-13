@@ -1,0 +1,23 @@
+<section class="register-form">
+  <%- messages() %>
+
+  <% if (errors && errors.length > 0) { %>
+    <ul class="notice">
+      <% errors.forEach(error => { %>
+        <li><%= error.msg %></li>
+      <% }) %>
+    </ul>
+  <% } %>
+
+  <h1>Delete Review for <%= vehicle.inv_year %> <%= vehicle.inv_make %> <%= vehicle.inv_model %></h1>
+  <p>Are you sure you want to delete this review?</p>
+  <label for="review_text">Review:</label>
+  <p><%= review.review_text %></p>
+  
+  <form action="/review/delete" method="post">
+    <input type="hidden" name="review_id" value="<%= review.review_id %>">
+    <button type="submit">Yes, Delete</button>
+  </form>
+  <a href="/account">Cancel</a>
+  
+</select>

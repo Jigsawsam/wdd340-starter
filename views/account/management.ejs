@@ -1,17 +1,46 @@
+<div id="account-management-page">
 
   <h1>Account Management</h1>
   
   <%- messages() %>
     
-
-
   <p>You're logged in.</p>
 
   <h2>Welcome <%= accountData.account_firstname %></h2>
 
-<a href="/account/update/<%= accountData.account_id %>">Update Account Information</a>
+  <a href="/account/update/<%= accountData.account_id %>">Update Account Information</a>
 
-<% if (["Employee", "Admin"].includes(accountData.account_type)) { %>
-  <h3>Inventory Management</h3>
-  <p><a href="/inv/">Manage Inventory</a></p>
-<% } %>
+  <% if (["Employee", "Admin"].includes(accountData.account_type)) { %>
+    <h3>Inventory Management</h3>
+    <p><a href="/inv/">Manage Inventory</a></p>
+  <% } %>
+
+  <h2>Your Reviews</h2>
+  <% if (reviews && reviews.length > 0) { %>
+    <ul>
+      <% reviews.forEach(r => { %>
+        <li>
+          <p>
+            <strong>
+              <a href="/inv/detail/<%= r.inv_id %>">
+                <%= r.inv_year %> <%= r.inv_make %> <%= r.inv_model %>
+              </a>
+            </strong>
+          </p>
+          <p><%= r.review_text %></p>
+          <p><small><%= new Date(r.review_date).toLocaleDateString() %></small></p>
+          <p>
+            <a href="/review/edit/<%= r.review_id %>">Edit</a> |
+            <a href="/review/delete/<%= r.review_id %>">Delete</a>
+          </p>
+        </li>
+      <% }) %>
+    </ul>
+  <% } else { %>
+    <p>You haven't written any reviews yet.</p>
+  <% } %>
+  
+</div>
+
+
+

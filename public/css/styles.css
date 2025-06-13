@@ -388,6 +388,7 @@ input:required:invalid, input:focus:invalid {
     padding: 1em;
     border-radius: 5px;
     margin-bottom: 1em;
+    list-style-type: none;
   }
   
   .inventory-form {
@@ -442,6 +443,175 @@ input:required:invalid, input:focus:invalid {
     background-color: #34495e;
   }
   
+  #tools ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 1rem;
+  }
+  
+  #tools li {
+    display: inline;
+  }
+  
+  #inv-display {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  #inv-display li {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    width: 260px; 
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  #inv-display li:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  }
+  
+  #inv-display li a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  
+  #inv-display li img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  .namePrice {
+    padding: 10px 15px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .namePrice hr {
+    margin: 10px 0;
+    border: 0;
+    border-top: 1px solid #eee;
+  }
+  
+  .namePrice h2 {
+    font-size: 1.25rem;
+    margin: 0 0 8px 0;
+    font-weight: 600;
+  }
+  
+  .namePrice h2 a {
+    color: #007bff; 
+  }
+  
+  .namePrice h2 a:hover {
+    text-decoration: underline;
+  }
+  
+  .namePrice span {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #28a745; 
+  }
+
+
+  .review-section {
+    margin-top: 1rem;
+  }
+  
+  .review-section ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .review-section li {
+    border-bottom: 1px solid #ddd;
+    padding: 0.5rem 0;
+  }
+  
+  .review-section .review-form textarea {
+    width: 100%;
+    height: 6rem;
+    padding: 0.5rem;
+    font-size: 1rem;
+  }
+  
+  .review-section .review-form button {
+    margin-top: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+#account-management-page {
+  font-family: Arial, sans-serif;
+  padding: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+#account-management-page h1 {
+  color: black;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 0.3em;
+}
+
+#account-management-page h2 {
+  color: black;
+  margin-top: 1.5em;
+}
+
+#account-management-page h3 {
+  color: #000000;
+  margin-top: 1em;
+}
+
+#account-management-page a {
+  color: #00416c;
+  text-decoration: none;
+}
+
+#account-management-page a:hover {
+  text-decoration: underline;
+}
+
+#account-management-page ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+#account-management-page ul li {
+  border: 1px solid #ddd;
+  padding: 1em;
+  margin-bottom: 1em;
+  border-radius: 6px;
+  background-color: #f9f9f9;
+}
+
+#account-management-page ul li p {
+  margin: 0.3em 0;
+}
+
+#account-management-page ul li p small {
+  color: #666;
+}
+
+#account-management-page ul li p a {
+  margin-right: 0.5em;
+}
 
   
 /*---------------------------------------------

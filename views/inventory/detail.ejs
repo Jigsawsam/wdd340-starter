@@ -1,5 +1,41 @@
-
-
   <%- detail %>
 
+<%- messages() %>
+
+<% if (errors && errors.length > 0) { %>
+  <ul class="notice">
+    <% errors.forEach(error => { %>
+      <li><%= error.msg %></li>
+    <% }) %>
+  </ul>
+<% } %>
+
+<div class="review-section">
+  <h2>Reviews</h2>
+  <% if (reviews.length > 0) { %>
+    <ul>
+      <% reviews.forEach(r => { %>
+        <li>
+          <p><strong><%= r.account_firstname[0] + r.account_lastname %>:</strong></p>
+          <p><%= r.review_text %></p>
+          <p><small><%= new Date(r.review_date).toLocaleString() %></small></p>
+        </li>
+      <% }) %>
+    </ul>
+  <% } else { %>
+    <p>No reviews yet.</p>
+  <% } %>
+
+  <% if (!loggedin) { %>
+    <p>Login to leave a review: <a href="/account/login">Login</a></p>
+  <% } else { %>
+    <form action="/review/add" method="post" class="review-form">
+      <p>Screen Name: <%= accountData.account_firstname[0] + accountData.account_lastname %></p>
+      <textarea name="review_text" required></textarea>
+      <input type="hidden" name="inv_id" value="<%= vehicle.inv_id %>">
+      <input type="hidden" name="account_id" value="<%= accountData.account_id %>">
+      <button type="submit">Submit Review</button>
+    </form>
+  <% } %>
+</div>
 
